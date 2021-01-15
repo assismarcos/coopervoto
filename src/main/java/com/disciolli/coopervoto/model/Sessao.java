@@ -6,7 +6,6 @@ import java.util.List;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Reference;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -25,7 +24,6 @@ public class Sessao {
 	@DBRef
 	private Pauta pauta;
 
-	@Reference
 	private List<Voto> votos;
 
 	private Date dataHoraInicio;
