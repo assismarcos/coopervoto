@@ -1,11 +1,13 @@
 package com.disciolli.coopervoto.model;
 
+import java.util.List;
+
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.disciolli.coopervoto.response.PautaResponse;
+import com.disciolli.coopervoto.dto.PautaDto;
 
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -14,28 +16,33 @@ import springfox.documentation.annotations.ApiIgnore;
 public class Pauta {
 
 	@Id
-	private String codigo;
-	
+	private String id;
+
 	@NotEmpty
 	private String nome;
 
 	private String descricao;
 
+	private Sessao sessao;
+
+	private boolean resultadoProcessado;
+
+	private List<TotalVotoOpcao> totalVotos;
+
 	public Pauta() {
 	}
 
-	public Pauta(String codigo, String nome, String descricao) {
-		this.codigo = codigo;
+	public Pauta(String nome, String descricao) {
 		this.nome = nome;
 		this.descricao = descricao;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	public String getId() {
+		return id;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -53,14 +60,33 @@ public class Pauta {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	public PautaResponse toDTO() {
-		return new PautaResponse(getCodigo(), getNome(), getDescricao());
+
+	public Sessao getSessao() {
+		return sessao;
 	}
 
-	@Override
-	public String toString() {
-		return "Pauta [codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + "]";
+	public void setSessao(Sessao sessao) {
+		this.sessao = sessao;
+	}
+
+	public boolean isResultadoProcessado() {
+		return resultadoProcessado;
+	}
+
+	public void setResultadoProcessado(boolean resultadoProcessado) {
+		this.resultadoProcessado = resultadoProcessado;
+	}
+
+	public PautaDto toDto() {
+		return new PautaDto(id, nome, descricao, sessao);
+	}
+
+	public List<TotalVotoOpcao> getTotalVotos() {
+		return totalVotos;
+	}
+
+	public void setTotalVotos(List<TotalVotoOpcao> totalVotos) {
+		this.totalVotos = totalVotos;
 	}
 
 }

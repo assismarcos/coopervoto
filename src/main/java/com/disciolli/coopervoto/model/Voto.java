@@ -1,40 +1,50 @@
 package com.disciolli.coopervoto.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import springfox.documentation.annotations.ApiIgnore;
 
 @ApiIgnore
+@Document(value = "voto")
 public class Voto {
 
+	@Id
+	private String id;
+
+	@Indexed
 	@NotNull
-	@DBRef
-	private Associado associado;
+	private String pautaId;
+
+	@NotNull
+	private String cpf;
 
 	@NotNull
 	private VotoOpcao opcao;
 
-	private Date dataHora;
+	private LocalDateTime dataHora;
 
 	public Voto() {
 	}
 
-	public Voto(Associado associado, VotoOpcao opcao, Date dataHora) {
-		this.associado = associado;
+	public Voto(String pautaId, String cpf, VotoOpcao opcao, LocalDateTime dataHora) {
+		this.pautaId = pautaId;
+		this.cpf = cpf;
 		this.opcao = opcao;
 		this.dataHora = dataHora;
 	}
 
-	public Associado getAssociado() {
-		return associado;
+	public String getId() {
+		return id;
 	}
 
-	public void setAssociado(Associado associado) {
-		this.associado = associado;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public VotoOpcao getOpcao() {
@@ -45,12 +55,28 @@ public class Voto {
 		this.opcao = opcao;
 	}
 
-	public Date getDataHora() {
+	public LocalDateTime getDataHora() {
 		return dataHora;
 	}
 
-	public void setDataHora(Date dataHora) {
+	public void setDataHora(LocalDateTime dataHora) {
 		this.dataHora = dataHora;
+	}
+
+	public String getPautaId() {
+		return pautaId;
+	}
+
+	public void setPautaId(String pautaId) {
+		this.pautaId = pautaId;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 }
