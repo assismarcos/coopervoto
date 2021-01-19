@@ -12,6 +12,7 @@ import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -51,19 +52,24 @@ public class ControllerExceptionHandler {
 		}
 
 		return ret;
+	}
 
+	@ExceptionHandler(HttpMessageConversionException.class)
+	public void handleConverterException(HttpServletResponse res, HttpMessageConversionException ex)
+			throws IOException {
+		res.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
 	}
 
 	@ExceptionHandler(UnprocessableException.class)
 	public void handleUnprocessableException(HttpServletResponse res, UnprocessableException ex) throws IOException {
 		res.sendError(HttpStatus.UNPROCESSABLE_ENTITY.value(), ex.getMessage());
 	}
-	
+
 	@ExceptionHandler(NotFoundException.class)
 	public void handleNotFoundException(HttpServletResponse res, NotFoundException ex) throws IOException {
 		res.sendError(HttpStatus.NOT_FOUND.value(), ex.getMessage());
 	}
-	
+
 	@ExceptionHandler(CustomValidationException.class)
 	public void handleNotFoundException(HttpServletResponse res, CustomValidationException ex) throws IOException {
 		res.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
