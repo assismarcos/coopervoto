@@ -2,6 +2,7 @@ package com.disciolli.coopervoto.model;
 
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,6 +13,7 @@ import springfox.documentation.annotations.ApiIgnore;
 public class Associado {
 
 	@Id
+	@CPF
 	private String cpf;
 
 	@NotEmpty
