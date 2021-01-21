@@ -17,7 +17,7 @@ O serviço permite:
 - Java 11
 - IDE Spring STS
 - Gradle para gerenciar as dependências
-- Spring Boot, Starters Web/Test, Data, Actuator (métricas), DevTools, JUnit5, Mockito, Swagger
+- Spring Boot, Starters Web/Test, Data, Actuator (métricas), DevTools, JUnit5, Mockito, Swagger, Kafka
 - MongoDB banco de dados NoSQL baseado em documentos
 - Postman para realizar requisições de teste na api
 - Docker
